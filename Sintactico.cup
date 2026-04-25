@@ -67,18 +67,18 @@ asignacion ::= ID :i IGUAL expresion {:
 	System.out.println("Regla 19 --> Id = constante");
 :};
 
-expresion ::= expresion OP_SUMA termino {:System.out.println("Regla 20 --> E+T"); :}
-    	|expresion OP_RES termino {:System.out.println("Regla 21 --> E-T"); :}
-	|termino {:System.out.println("Regla 22 --> Término"); :};
+expresion ::= expresion:e OP_SUMA termino:t {: RESULT = new NodoSuma(e, t); System.out.println("Regla 20 --> E+T"); :}
+    	|expresion:e OP_RES termino:t {: RESULT = new NodoResta(e, t); System.out.println("Regla 21 --> E-T"); :}
+	|termino:t {: RESULT = new NodoConstante(t); System.out.println("Regla 22 --> Término"); :};
 
-termino ::= termino OP_MUL factor {:System.out.println("Regla 23 --> T*F"); :}
-	|termino OP_DIV factor {:System.out.println("Regla 24 --> T/F"); :}
-	|factor:f {:System.out.println("Regla 25 --> factor valor = " + f); :};
+termino ::= termino:t OP_MUL factor:f {: RESULT = new NodoMultiplicacion(t, f); System.out.println("Regla 23 --> T*F"); :}
+	|termino:t OP_DIV factor:f {: RESULT = new NodoDivision(t, f); System.out.println("Regla 24 --> T/F"); :}
+	|factor {: System.out.println("Regla 25 --> factor valor = " + f); :};
 
-factor ::= CONST_INT :ent {:System.out.println("Regla 26 --> Constante entera = " + ent); RESULT = ent; :}
-	| CONST_FLOAT {:System.out.println("Regla 27 --> Constante Float"); :} 
-	| ID :id {:System.out.println("Regla 28 --> Variable= " + id); RESULT = id; :}
-	|PAR_ABRE expresion PAR_CIE {:System.out.println("Regla 29 --> (Expresión)"); :};
+factor ::= CONST_INT :ent {: RESULT = new NodoConstante(ent); System.out.println("Regla 26 --> Constante entera = " + ent); :}
+	| CONST_FLOAT :flo {: RESULT = new NodoConstante(flo); System.out.println("Regla 27 --> Constante Float"); :} 
+	| ID :id {: RESULT = new NodoIdentificador(id); System.out.println("Regla 28 --> Variable= " + id); :}
+	|PAR_ABRE expresion:e PAR_CIE {: RESULT = new NodoExpresion(e); System.out.println("Regla 29 --> (Expresión)"); :};
 
 mientras ::= MIENTRAS exp_logica LLAV_ABRE bloque_sentencias LLAV_CIE {:System.out.println("Regla 30 --> Mientras expresión lógica {bloque}"); :};
 
@@ -101,10 +101,15 @@ decisiones ::= IF exp_logica LLAV_ABRE bloque_sentencias LLAV_CIE {:System.out.p
 
 salida::= PRINT CONST_STRING {:System.out.println("Regla 43 --> Print constante"); :};
 
-let ::= LET lista_let DEFAULT expresion {:System.out.println("Regla 44 --> Let lista let Default expresion"); :};
+let ::= LET lista_let:l DEFAULT expresion:e {: RESULT = new NodoLet(l, e); System.out.println("Regla 44 --> Let lista let Default expresion"); :};
 
-lista_let::= termino_let {:System.out.println("Regla 45 --> Término let"); :} 
-	| lista_let COMA termino_let {:System.out.println("Regla 46 --> Lista let, término let "); :};
+lista_let::= termino_let:t {: a = new ArrayList<NodoTerminoLet>();
+                              a.add(t);
+                              RESULT = a;
+							  System.out.println("Regla 45 --> Término let"); :} 
+	| lista_let:l COMA termino_let:t {: l.add(t);
+                                        RESULT = l;
+				                        System.out.println("Regla 46 --> Lista let, término let "); :};
 
-termino_let ::= ID :id {:System.out.println("Regla 47 --> Variable= " + id); RESULT = id; :} 
-	| ID DOSPUNTOS expresion {:System.out.println("Regla 48 --> Id: expresión"); :};
+termino_let ::= ID:id {: RESULT = new NodoTerminoLet(id); System.out.println("Regla 47 --> Variable= " + id); :} 
+	| ID:id DOSPUNTOS expresion:e {: RESULT = new NodoTerminoLet(id, e); System.out.println("Regla 48 --> Id: expresión"); :};

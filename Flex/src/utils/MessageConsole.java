@@ -1,14 +1,13 @@
 package utils;
 
 /**
- * Clase útil para redirigir las salidas de System.out a un
+ * Clase Ãštil para redirigir las salidas de System.out a un
  * componente JTextArea.
  * @see https://tips4java.wordpress.com/2008/11/08/message-console/
  */
 
 import java.io.*;
 import java.awt.*;
-import javax.swing.*;
 import javax.swing.event.*;
 import javax.swing.text.*;
 
