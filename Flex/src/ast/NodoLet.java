@@ -22,9 +22,15 @@ public class NodoLet extends NodoSentencia {
 
         // Loop para recorrer los términos LET.
         for (NodoTerminoLet terminoLet : this.listaLet) {
-            if (terminoLet.getValor() == null) {
-                terminoLet.setValor(this.valorDefault);
+            System.out.println("--------------------------------------");
+            System.out.println(terminoLet.getExpresion());
+            System.out.println("--------------------------------------");
+            if (terminoLet.getExpresion() == null) {
+                terminoLet.setExpresion(this.valorDefault);
             }
+            System.out.println("--------------------------------------");
+            System.out.println(terminoLet.getExpresion());
+            System.out.println("--------------------------------------");
             resultado.append(terminoLet.graficar(miId));
         }
 

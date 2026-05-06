@@ -80,7 +80,7 @@ COMENTARIO = {COM_ABRE}({LETRA}|{DIGITO}|{ESPACIO}|{FIN_LINEA}|{COM}|{PUNTO}|{CO
 {CONST_INT}			{
 						TS ts = TS.getInstance();
 						ts.addSymbol("_" + yytext(), "CONST_INT", "-", yytext(), "-");
-						return new Symbol(sym.CONST_INT, yytext());
+						return new Symbol(sym.CONST_INT, Integer.parseInt(yytext()));
 					}
 {CONST_STRING}		{
 						if (yytext().length() <= 32) {
@@ -94,7 +94,7 @@ COMENTARIO = {COM_ABRE}({LETRA}|{DIGITO}|{ESPACIO}|{FIN_LINEA}|{COM}|{PUNTO}|{CO
 {CONST_FLOAT}		{
 						TS ts = TS.getInstance();
 						ts.addSymbol("_" + yytext(), "CONST_FLOAT", "-", yytext(), "-");
-						return new Symbol(sym.CONST_FLOAT, yytext());
+						return new Symbol(sym.CONST_FLOAT, Float.parseFloat(yytext()));
 					}
 
 }

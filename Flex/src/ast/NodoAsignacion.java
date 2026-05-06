@@ -1,8 +1,8 @@
 package ast;
 
 public class NodoAsignacion extends NodoSentencia {
-    private final NodoIdentificador identificador;
-    private final NodoExpresion expresion;
+    private NodoIdentificador identificador;
+    private NodoExpresion expresion;
 
     public NodoAsignacion(NodoIdentificador identificador, NodoExpresion expresion) {
         super(":=");
@@ -16,5 +16,13 @@ public class NodoAsignacion extends NodoSentencia {
         return super.graficar(idPadre) +
                 identificador.graficar(miId) +
                 expresion.graficar(miId);
+    }
+
+    public NodoExpresion getExpresion() {
+        return expresion;
+    }
+
+    public void setExpresion(NodoExpresion expresion) {
+        this.expresion = expresion;
     }
 }
