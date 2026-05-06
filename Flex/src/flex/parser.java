@@ -543,7 +543,10 @@ class CUP$parser$actions {
           case 23: // expresion ::= termino 
             {
               NodoExpresion RESULT =null;
-		 System.out.println("Regla 22 --> Término"); 
+		int tleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int tright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		NodoExpresion t = (NodoExpresion)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		 RESULT = t; System.out.println("Regla 22 --> Término"); 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("expresion",14, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -585,7 +588,7 @@ class CUP$parser$actions {
 		int fleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int fright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		NodoExpresion f = (NodoExpresion)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		 System.out.println("Regla 25 --> factor valor = " + f); 
+		 RESULT = f; System.out.println("Regla 25 --> factor valor = " + f); 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("termino",15, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -687,6 +690,12 @@ class CUP$parser$actions {
           case 36: // condicion ::= expresion op expresion 
             {
               Object RESULT =null;
+		int e1left = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
+		int e1right = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).right;
+		NodoExpresion e1 = (NodoExpresion)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-2)).value;
+		int e2left = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int e2right = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		NodoExpresion e2 = (NodoExpresion)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		System.out.println("Regla 34 --> E operador E"); 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("condicion",18, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }

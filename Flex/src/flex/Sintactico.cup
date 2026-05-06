@@ -100,11 +100,11 @@ asignacion ::= ID :i IGUAL expresion {:
 
 expresion ::= expresion:e OP_SUMA termino:t {: RESULT = new NodoSuma(e, t); System.out.println("Regla 20 --> E+T"); :}
     	|expresion:e OP_RES termino:t {: RESULT = new NodoResta(e, t); System.out.println("Regla 21 --> E-T"); :}
-	|termino {: System.out.println("Regla 22 --> Término"); :};
+	|termino:t {: RESULT = t; System.out.println("Regla 22 --> Término"); :};
 
 termino ::= termino:t OP_MUL factor:f {: RESULT = new NodoMultiplicacion(t, f); System.out.println("Regla 23 --> T*F"); :}
 	|termino:t OP_DIV factor:f {: RESULT = new NodoDivision(t, f); System.out.println("Regla 24 --> T/F"); :}
-	|factor:f {: System.out.println("Regla 25 --> factor valor = " + f); :};
+	|factor:f {: RESULT = f; System.out.println("Regla 25 --> factor valor = " + f); :};
 
 factor ::= CONST_INT :ent {: RESULT = new NodoConstante(ent); System.out.println("Regla 26 --> Constante entera = " + ent); :}
 	| CONST_FLOAT :flo {: RESULT = new NodoConstante(Math.round(flo)); System.out.println("Regla 27 --> Constante Float"); :} 
@@ -118,7 +118,7 @@ exp_logica ::= condicion {:System.out.println("Regla 31 --> Condición"); :}
 	| condicion OR condicion {:System.out.println("Regla 33 --> Condición or condición"); :}
 	| PAR_ABRE exp_logica PAR_CIE {:System.out.println("Regla 33.1 --> ( Expresión lógica )"); :};
 
-condicion ::= expresion op expresion {:System.out.println("Regla 34 --> E operador E"); :};
+condicion ::= expresion:e1 op expresion:e2 {:System.out.println("Regla 34 --> E operador E"); :};
 
 op::= OP_MAY {:System.out.println("Regla 35 --> Operador mayor"); :}
 	| OP_MEN {:System.out.println("Regla 36 --> Operador menor"); :}

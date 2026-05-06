@@ -1,0 +1,20 @@
+graph G {nodo_programa [label="Programa"]
+nodo_1160460865 [label="LET"]
+nodo_programa -- nodo_1160460865
+nodo_951007336 [label=":="]
+nodo_1160460865 -- nodo_951007336
+nodo_2001049719 [label="ID: x"]
+nodo_951007336 -- nodo_2001049719
+nodo_1804094807 [label="+"]
+nodo_951007336 -- nodo_1804094807
+nodo_1159190947 [label="CTE: 5"]
+nodo_1804094807 -- nodo_1159190947
+nodo_925858445 [label="CTE: 2"]
+nodo_1804094807 -- nodo_925858445
+nodo_455659002 [label=":="]
+nodo_1160460865 -- nodo_455659002
+nodo_250421012 [label="ID: var"]
+nodo_455659002 -- nodo_250421012
+nodo_1421795058 [label="CTE: 10"]
+nodo_455659002 -- nodo_1421795058
+}

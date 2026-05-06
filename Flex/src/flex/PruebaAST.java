@@ -20,7 +20,7 @@ public class PruebaAST {
         } catch (Exception e) {
             System.out.println(e);
         }
-    String cmd = "/usr/local/bin/dot -Tpng arbol.dot -o arbol.png";
+    String cmd = "/usr/bin/dot -Tpng arbol.dot -o arbol.png";
     Runtime.getRuntime().exec(cmd);
     }
 }
