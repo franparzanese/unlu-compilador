@@ -1,20 +1,54 @@
 graph G {nodo_programa [label="Programa"]
-nodo_1160460865 [label="LET"]
-nodo_programa -- nodo_1160460865
-nodo_951007336 [label=":="]
-nodo_1160460865 -- nodo_951007336
-nodo_2001049719 [label="ID: x"]
-nodo_951007336 -- nodo_2001049719
-nodo_1804094807 [label="+"]
-nodo_951007336 -- nodo_1804094807
-nodo_1159190947 [label="CTE: 5"]
-nodo_1804094807 -- nodo_1159190947
-nodo_925858445 [label="CTE: 2"]
-nodo_1804094807 -- nodo_925858445
+nodo_1325547227 [label="LET"]
+nodo_programa -- nodo_1325547227
+nodo_1450495309 [label=":="]
+nodo_1325547227 -- nodo_1450495309
+nodo_1670782018 [label="ID: suma"]
+nodo_1450495309 -- nodo_1670782018
+nodo_140435067 [label="+"]
+nodo_1450495309 -- nodo_140435067
+nodo_1706377736 [label="*"]
+nodo_140435067 -- nodo_1706377736
+nodo_644117698 [label="ID: contador"]
+nodo_1706377736 -- nodo_644117698
+nodo_468121027 [label="CTE: 5"]
+nodo_1706377736 -- nodo_468121027
+nodo_1229416514 [label="CTE: 2"]
+nodo_140435067 -- nodo_1229416514
+nodo_1826771953 [label=":="]
+nodo_1325547227 -- nodo_1826771953
+nodo_1406718218 [label="ID: var"]
+nodo_1826771953 -- nodo_1406718218
+nodo_1044036744 [label="*"]
+nodo_1826771953 -- nodo_1044036744
+nodo_1421795058 [label="CTE: 2"]
+nodo_1044036744 -- nodo_1421795058
+nodo_245257410 [label="CTE: 7"]
+nodo_1044036744 -- nodo_245257410
 nodo_455659002 [label=":="]
-nodo_1160460865 -- nodo_455659002
-nodo_250421012 [label="ID: var"]
+nodo_1325547227 -- nodo_455659002
+nodo_250421012 [label="ID: d1"]
 nodo_455659002 -- nodo_250421012
-nodo_1421795058 [label="CTE: 10"]
-nodo_455659002 -- nodo_1421795058
+nodo_1705736037 [label="/"]
+nodo_455659002 -- nodo_1705736037
+nodo_617901222 [label="*"]
+nodo_1705736037 -- nodo_617901222
+nodo_1554547125 [label="ID: contar"]
+nodo_617901222 -- nodo_1554547125
+nodo_1915318863 [label="ID: actual"]
+nodo_617901222 -- nodo_1915318863
+nodo_1283928880 [label="-"]
+nodo_1705736037 -- nodo_1283928880
+nodo_1159190947 [label="CTE: 5"]
+nodo_1283928880 -- nodo_1159190947
+nodo_925858445 [label="CTE: 2"]
+nodo_1283928880 -- nodo_925858445
+nodo_295530567 [label="LET"]
+nodo_programa -- nodo_295530567
+nodo_2003749087 [label=":="]
+nodo_295530567 -- nodo_2003749087
+nodo_1324119927 [label="ID: suma"]
+nodo_2003749087 -- nodo_1324119927
+nodo_713338599 [label="CTE: 7"]
+nodo_2003749087 -- nodo_713338599
 }
