@@ -1,4 +1,25 @@
 BEGIN.PROGRAM
-LET suma:contador*5+2, var, d1:(contar*actual)/(5-2) DEFAULT 2*7
-LET suma DEFAULT 7
+
+LET contador DEFAULT 5
+LET mensaje DEFAULT 1
+
+while (contador > 0) {
+
+    PRINT "iteracion"
+
+    if (contador > 2) {
+
+        PRINT "contador mayor a dos"
+
+    }
+    else {
+
+        PRINT "contador menor o igual a dos"
+
+    }
+
+    contador = contador - 1
+
+}
+
 END.PROGRAM

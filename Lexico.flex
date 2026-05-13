@@ -60,7 +60,7 @@ COMENTARIO = {COM_ABRE}({LETRA}|{DIGITO}|{ESPACIO}|{FIN_LINEA}|{COM}|{PUNTO}|{CO
 "END.PROGRAM"		{return new Symbol(sym.ENDPROGRAM, yytext());}
 "DECLARE"			{return new Symbol(sym.DECLARE, yytext());}
 "ENDDECLARE"		{return new Symbol(sym.ENDDECLARE, yytext());}
-"while"				{return new Symbol(sym.MIENTRAS, yytext());}
+"while" 			{ return new Symbol(sym.WHILE, yytext()); }
 "if"				{return new Symbol(sym.IF, yytext());}
 "else"				{return new Symbol(sym.ELSE, yytext());}
 "PRINT"				{return new Symbol(sym.PRINT, yytext());}
