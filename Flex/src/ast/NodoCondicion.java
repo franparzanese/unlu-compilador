@@ -1,6 +1,6 @@
 package ast;
 
-public class NodoCondicion extends NodoExpresion {
+public class NodoCondicion extends NodoExpresionBooleana {
 
     private NodoExpresion izquierda;
     private String operador;

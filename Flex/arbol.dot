@@ -1,54 +1,64 @@
 graph G {nodo_programa [label="Programa"]
-nodo_1325547227 [label="LET"]
-nodo_programa -- nodo_1325547227
-nodo_1450495309 [label=":="]
-nodo_1325547227 -- nodo_1450495309
-nodo_1670782018 [label="ID: suma"]
-nodo_1450495309 -- nodo_1670782018
-nodo_140435067 [label="+"]
-nodo_1450495309 -- nodo_140435067
-nodo_1706377736 [label="*"]
-nodo_140435067 -- nodo_1706377736
-nodo_644117698 [label="ID: contador"]
-nodo_1706377736 -- nodo_644117698
-nodo_468121027 [label="CTE: 5"]
-nodo_1706377736 -- nodo_468121027
-nodo_1229416514 [label="CTE: 2"]
-nodo_140435067 -- nodo_1229416514
-nodo_1826771953 [label=":="]
-nodo_1325547227 -- nodo_1826771953
-nodo_1406718218 [label="ID: var"]
-nodo_1826771953 -- nodo_1406718218
-nodo_1044036744 [label="*"]
-nodo_1826771953 -- nodo_1044036744
-nodo_1421795058 [label="CTE: 2"]
-nodo_1044036744 -- nodo_1421795058
-nodo_245257410 [label="CTE: 7"]
-nodo_1044036744 -- nodo_245257410
-nodo_455659002 [label=":="]
-nodo_1325547227 -- nodo_455659002
-nodo_250421012 [label="ID: d1"]
-nodo_455659002 -- nodo_250421012
-nodo_1705736037 [label="/"]
-nodo_455659002 -- nodo_1705736037
-nodo_617901222 [label="*"]
-nodo_1705736037 -- nodo_617901222
-nodo_1554547125 [label="ID: contar"]
-nodo_617901222 -- nodo_1554547125
-nodo_1915318863 [label="ID: actual"]
-nodo_617901222 -- nodo_1915318863
-nodo_1283928880 [label="-"]
-nodo_1705736037 -- nodo_1283928880
-nodo_1159190947 [label="CTE: 5"]
-nodo_1283928880 -- nodo_1159190947
-nodo_925858445 [label="CTE: 2"]
-nodo_1283928880 -- nodo_925858445
-nodo_295530567 [label="LET"]
-nodo_programa -- nodo_295530567
-nodo_2003749087 [label=":="]
-nodo_295530567 -- nodo_2003749087
-nodo_1324119927 [label="ID: suma"]
-nodo_2003749087 -- nodo_1324119927
-nodo_713338599 [label="CTE: 7"]
-nodo_2003749087 -- nodo_713338599
+nodo_668386784 [label="LET"]
+nodo_programa -- nodo_668386784
+nodo_1313922862 [label=":="]
+nodo_668386784 -- nodo_1313922862
+nodo_495053715 [label="ID: contador"]
+nodo_1313922862 -- nodo_495053715
+nodo_791452441 [label="CTE: 5"]
+nodo_1313922862 -- nodo_791452441
+nodo_2094548358 [label="LET"]
+nodo_programa -- nodo_2094548358
+nodo_51228289 [label=":="]
+nodo_2094548358 -- nodo_51228289
+nodo_455896770 [label="ID: mensaje"]
+nodo_51228289 -- nodo_455896770
+nodo_1418481495 [label="CTE: 1"]
+nodo_51228289 -- nodo_1418481495
+nodo_1323165413 [label="LET"]
+nodo_programa -- nodo_1323165413
+nodo_1880587981 [label=":="]
+nodo_1323165413 -- nodo_1880587981
+nodo_511754216 [label="ID: contador2"]
+nodo_1880587981 -- nodo_511754216
+nodo_303563356 [label="CTE: 5"]
+nodo_1880587981 -- nodo_303563356
+nodo_1721931908 [label="WHILE"]
+nodo_programa -- nodo_1721931908
+nodo_1198108795 [label=">"]
+nodo_1721931908 -- nodo_1198108795
+nodo_135721597 [label="ID: contador"]
+nodo_1198108795 -- nodo_135721597
+nodo_142257191 [label="CTE: 0"]
+nodo_1198108795 -- nodo_142257191
+nodo_214126413 [label="PRINT"]
+nodo_1721931908 -- nodo_214126413
+nodo_396873410 [label="CTE_STR: \"iteracion\""]
+nodo_214126413 -- nodo_396873410
+nodo_1706234378 [label="IF"]
+nodo_1721931908 -- nodo_1706234378
+nodo_1867750575 [label="CONDICION"]
+nodo_1706234378 -- nodo_1867750575
+nodo_2046562095 [label="Then"]
+nodo_1706234378 -- nodo_2046562095
+nodo_1342443276 [label="PRINT"]
+nodo_2046562095 -- nodo_1342443276
+nodo_769287236 [label="CTE_STR: \"contador mayor a dos\""]
+nodo_1342443276 -- nodo_769287236
+nodo_1587487668 [label="Else"]
+nodo_1706234378 -- nodo_1587487668
+nodo_1199823423 [label="PRINT"]
+nodo_1587487668 -- nodo_1199823423
+nodo_932172204 [label="CTE_STR: \"contador menor o igual a dos\""]
+nodo_1199823423 -- nodo_932172204
+nodo_1225358173 [label=":="]
+nodo_1721931908 -- nodo_1225358173
+nodo_1848402763 [label="ID: contador"]
+nodo_1225358173 -- nodo_1848402763
+nodo_933699219 [label="-"]
+nodo_1225358173 -- nodo_933699219
+nodo_1831932724 [label="ID: contador"]
+nodo_933699219 -- nodo_1831932724
+nodo_1747585824 [label="CTE: 1"]
+nodo_933699219 -- nodo_1747585824
 }

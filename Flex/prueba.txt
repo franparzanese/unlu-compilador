@@ -2,12 +2,13 @@ BEGIN.PROGRAM
 
 LET contador DEFAULT 5
 LET mensaje DEFAULT 1
+LET contador2 DEFAULT 5
 
 while (contador > 0) {
 
     PRINT "iteracion"
 
-    if (contador > 2) {
+    if (contador > 2 or contador2 > 2) {
 
         PRINT "contador mayor a dos"
 

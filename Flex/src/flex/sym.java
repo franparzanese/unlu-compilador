@@ -21,7 +21,6 @@ public class sym {
   public static final int IGUAL = 9;
   public static final int COR_ABRE = 22;
   public static final int OR = 21;
-  public static final int MIENTRAS = 35;
   public static final int ENDPROGRAM = 34;
   public static final int LLAV_ABRE = 26;
   public static final int OP_MUL = 18;
@@ -36,6 +35,7 @@ public class sym {
   public static final int DECLARE = 31;
   public static final int ELSE = 37;
   public static final int OP_IGUAL = 11;
+  public static final int WHILE = 35;
   public static final int DEFAULT = 40;
   public static final int LET = 39;
   public static final int FLOAT = 7;
@@ -85,7 +85,7 @@ public class sym {
   "ENDDECLARE",
   "BEGINPROGRAM",
   "ENDPROGRAM",
-  "MIENTRAS",
+  "WHILE",
   "IF",
   "ELSE",
   "PRINT",

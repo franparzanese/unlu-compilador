@@ -729,9 +729,43 @@ public class Lexico implements java_cup.runtime.Scanner {
             // fall through
           case 42: break;
           case 2: 
-            { TS ts = TS.getInstance();
-						ts.addSymbol(yytext(), "ID", "-", "-", "-");
-						return new Symbol(sym.ID, yytext());
+            { 
+                  String text = yytext();
+                  if (text.equalsIgnoreCase("or")) {
+                    return new Symbol(sym.OR, yytext());
+                  } else if (text.equalsIgnoreCase("and")) {
+                    return new Symbol(sym.AND, yytext());
+                  } else if (text.equalsIgnoreCase("if")) {
+                    return new Symbol(sym.IF, yytext());
+                  } else if (text.equalsIgnoreCase("else")) {
+                    return new Symbol(sym.ELSE, yytext());
+                  } else if (text.equalsIgnoreCase("while")) {
+                    return new Symbol(sym.WHILE, yytext());
+                  } else if (text.equalsIgnoreCase("print")) {
+                    return new Symbol(sym.PRINT, yytext());
+                  } else if (text.equalsIgnoreCase("let")) {
+                    return new Symbol(sym.LET, yytext());
+                  } else if (text.equalsIgnoreCase("default")) {
+                    return new Symbol(sym.DEFAULT, yytext());
+                  } else if (text.equalsIgnoreCase("declare")) {
+                    return new Symbol(sym.DECLARE, yytext());
+                  } else if (text.equalsIgnoreCase("enddeclare")) {
+                    return new Symbol(sym.ENDDECLARE, yytext());
+                  } else if (text.equalsIgnoreCase("beginprogram")) {
+                    return new Symbol(sym.BEGINPROGRAM, yytext());
+                  } else if (text.equalsIgnoreCase("endprogram")) {
+                    return new Symbol(sym.ENDPROGRAM, yytext());
+                  } else if (text.equalsIgnoreCase("float")) {
+                    return new Symbol(sym.FLOAT, yytext());
+                  } else if (text.equalsIgnoreCase("int")) {
+                    return new Symbol(sym.INT, yytext());
+                  } else if (text.equalsIgnoreCase("string")) {
+                    return new Symbol(sym.STRING, yytext());
+                  } else {
+                    TS ts = TS.getInstance();
+                    ts.addSymbol(yytext(), "ID", "-", "-", "-");
+                    return new Symbol(sym.ID, yytext());
+                  }
             } 
             // fall through
           case 43: break;
@@ -901,7 +935,7 @@ public class Lexico implements java_cup.runtime.Scanner {
             // fall through
           case 74: break;
           case 34: 
-            { return new Symbol(sym.MIENTRAS, yytext());
+            { return new Symbol(sym.WHILE, yytext());
             } 
             // fall through
           case 75: break;
