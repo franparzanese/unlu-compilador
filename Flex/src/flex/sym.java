@@ -13,7 +13,7 @@ public class sym {
   public static final int OP_MAYIG = 14;
   public static final int BEGINPROGRAM = 33;
   public static final int COR_CIE = 23;
-  public static final int INT = 6;
+  public static final int INT = 5;
   public static final int OP_DIV = 19;
   public static final int PAR_ABRE = 24;
   public static final int AND = 20;
@@ -38,12 +38,12 @@ public class sym {
   public static final int WHILE = 35;
   public static final int DEFAULT = 40;
   public static final int LET = 39;
-  public static final int FLOAT = 7;
+  public static final int FLOAT = 6;
   public static final int OP_MAY = 10;
-  public static final int CONST_STRING = 5;
+  public static final int CONST_STRING = 8;
   public static final int LLAV_CIE = 27;
   public static final int DOSPUN_IG = 28;
-  public static final int STRING = 8;
+  public static final int STRING = 7;
   public static final int OP_SUMA = 16;
   public static final int PRINT = 38;
   public static final int PAR_CIE = 25;
@@ -55,10 +55,10 @@ public class sym {
   "CONST_INT",
   "CONST_FLOAT",
   "ID",
-  "CONST_STRING",
   "INT",
   "FLOAT",
   "STRING",
+  "CONST_STRING",
   "IGUAL",
   "OP_MAY",
   "OP_IGUAL",

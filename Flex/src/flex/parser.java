@@ -7,7 +7,6 @@ package flex;
 
 import ast.*;
 import java.util.ArrayList;
-import java.util.List;
 import java_cup.runtime.*;
 import java_cup.runtime.XMLElement;
 
@@ -73,7 +72,7 @@ public class parser extends java_cup.runtime.lr_parser {
     "\ufff3\001\002\000\012\004\037\005\036\006\033\032\067" +
     "\001\002\000\016\006\023\044\064\045\013\046\021\050" +
     "\024\051\025\001\002\000\004\013\060\001\002\000\004" +
-    "\007\057\001\002\000\004\006\026\001\002\000\010\037" +
+    "\012\057\001\002\000\004\006\026\001\002\000\010\037" +
     "\uffd0\040\055\052\uffd0\001\002\000\006\037\uffd2\052\uffd2" +
     "\001\002\000\006\037\031\052\032\001\002\000\004\006" +
     "\026\001\002\000\012\004\037\005\036\006\033\032\034" +
@@ -127,7 +126,7 @@ public class parser extends java_cup.runtime.lr_parser {
     "\034\001\002\000\012\022\046\023\047\037\uffcf\052\uffcf" +
     "\001\002\000\020\006\uffd4\035\uffd4\044\uffd4\045\uffd4\046" +
     "\uffd4\050\uffd4\051\uffd4\001\002\000\014\004\037\005\036" +
-    "\006\033\007\061\032\034\001\002\000\020\006\uffed\035" +
+    "\006\033\012\061\032\034\001\002\000\020\006\uffed\035" +
     "\uffed\044\uffed\045\uffed\046\uffed\050\uffed\051\uffed\001\002" +
     "\000\024\006\uffee\022\046\023\047\035\uffee\044\uffee\045" +
     "\uffee\046\uffee\050\uffee\051\uffee\001\002\000\020\006\ufff4" +
@@ -173,11 +172,11 @@ public class parser extends java_cup.runtime.lr_parser {
     "\133\001\002\000\006\031\137\037\136\001\002\000\004" +
     "\031\135\001\002\000\006\030\ufffc\042\ufffc\001\002\000" +
     "\004\006\133\001\002\000\004\036\140\001\002\000\004" +
-    "\030\141\001\002\000\010\010\145\011\144\012\142\001" +
+    "\030\141\001\002\000\010\007\145\010\144\011\142\001" +
     "\002\000\006\031\ufff7\037\ufff7\001\002\000\006\031\ufffb" +
     "\037\ufffb\001\002\000\006\031\ufff9\037\ufff9\001\002\000" +
     "\006\031\ufff8\037\ufff8\001\002\000\004\037\147\001\002" +
-    "\000\010\010\145\011\144\012\142\001\002\000\006\031" +
+    "\000\010\007\145\010\144\011\142\001\002\000\006\031" +
     "\ufffa\037\ufffa\001\002\000\006\030\ufffd\042\ufffd\001\002" +
     "\000\004\043\uffff\001\002" });
 
@@ -293,6 +292,8 @@ class CUP$parser$actions {
 
 	public ArrayList<NodoTerminoLet> a;
 	public ArrayList<NodoSentencia> b;
+    public ArrayList<NodoTipo> c;
+    public ArrayList<NodoIdentificador> d;
 
   private final parser parser;
 
@@ -383,8 +384,19 @@ class CUP$parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 6: // declaracion_var ::= ID COR_CIE DOSPUN_IG COR_ABRE tipo 
             {
-              Object RESULT =null;
-		System.out.println("Regla 5 --> Id ] := [ tipo"); 
+              ArrayList<NodoTipo> RESULT =null;
+		int ileft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-4)).left;
+		int iright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-4)).right;
+		String i = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-4)).value;
+		int tleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int tright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		NodoTipo t = (NodoTipo)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		 c = new ArrayList<NodoTipo>();
+                                                             d = new ArrayList<NodoIdentificador>();
+                                                             c.add(t);
+                                                             d.add(new NodoIdentificador(i));
+                                                             RESULT = c;
+                                                             System.out.println("Regla 5 --> Id ] := [ tipo"); 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("declaracion_var",5, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-4)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -392,8 +404,20 @@ class CUP$parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 7: // declaracion_var ::= ID COMA declaracion_var COMA tipo 
             {
-              Object RESULT =null;
-		System.out.println("Regla 6 --> Id declaración variables tipo"); 
+              ArrayList<NodoTipo> RESULT =null;
+		int ileft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-4)).left;
+		int iright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-4)).right;
+		String i = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-4)).value;
+		int dvleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
+		int dvright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).right;
+		ArrayList<NodoTipo> dv = (ArrayList<NodoTipo>)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-2)).value;
+		int tleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int tright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		NodoTipo t = (NodoTipo)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		 dv.add(t);
+                                                d.add(new NodoIdentificador(i));
+                                                RESULT = dv;
+                                                System.out.println("Regla 6 --> Id declaración variables tipo"); 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("declaracion_var",5, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-4)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -401,8 +425,8 @@ class CUP$parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 8: // tipo ::= FLOAT 
             {
-              Object RESULT =null;
-		System.out.println("Regla 7 --> Float"); 
+              NodoTipo RESULT =null;
+		 RESULT = new NodoTipoFloat(); System.out.println("Regla 7 --> Float"); 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("tipo",6, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -410,8 +434,8 @@ class CUP$parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 9: // tipo ::= INT 
             {
-              Object RESULT =null;
-		System.out.println("Regla 8 --> Integer"); 
+              NodoTipo RESULT =null;
+		 RESULT = new NodoTipoInt(); System.out.println("Regla 8 --> Integer"); 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("tipo",6, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -419,8 +443,8 @@ class CUP$parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 10: // tipo ::= STRING 
             {
-              Object RESULT =null;
-		System.out.println("Regla 9 --> String"); 
+              NodoTipo RESULT =null;
+		 RESULT = new NodoTipoString(); System.out.println("Regla 9 --> String"); 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("tipo",6, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -475,7 +499,7 @@ class CUP$parser$actions {
               NodoSentencia RESULT =null;
 		int aleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int aright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
-		NodoSentencia a = (NodoSentencia)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		NodoAsignacion a = (NodoAsignacion)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		 RESULT = a; System.out.println("Regla 13 --> Asignación"); 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("sentencia",8, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -511,7 +535,7 @@ class CUP$parser$actions {
               NodoSentencia RESULT =null;
 		int sleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int sright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
-		NodoSentencia s = (NodoSentencia)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		NodoPrint s = (NodoPrint)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		 RESULT = s; System.out.println("Regla 16 --> Salida"); 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("sentencia",8, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -532,7 +556,7 @@ class CUP$parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 19: // asignacion ::= ID IGUAL expresion 
             {
-              NodoSentencia RESULT =null;
+              NodoAsignacion RESULT =null;
 		int ileft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
 		int iright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).right;
 		String i = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-2)).value;
@@ -556,7 +580,7 @@ class CUP$parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 20: // asignacion ::= ID IGUAL CONST_STRING 
             {
-              NodoSentencia RESULT =null;
+              NodoAsignacion RESULT =null;
 		int ileft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
 		int iright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).right;
 		String i = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-2)).value;
@@ -680,7 +704,7 @@ class CUP$parser$actions {
 		int floleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int floright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		float flo = (float)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		 RESULT = new NodoConstante(Math.round(flo)); System.out.println("Regla 27 --> Constante Float"); 
+		 RESULT = new NodoConstanteFloat(flo); System.out.println("Regla 27 --> Constante Float"); 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("factor",16, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -821,7 +845,7 @@ class CUP$parser$actions {
 		int e2left = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int e2right = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		NodoExpresion e2 = (NodoExpresion)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		 RESULT = new NodoCondicion(e1, "==", e2); System.out.println("Regla 34 --> E == E"); 
+		 RESULT = new NodoIgual(e1, e2); System.out.println("Regla 34 --> E == E"); 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("comparison",19, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -836,7 +860,7 @@ class CUP$parser$actions {
 		int e2left = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int e2right = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		NodoExpresion e2 = (NodoExpresion)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		 RESULT = new NodoCondicion(e1, "<=", e2); System.out.println("Regla 34 --> E <= E"); 
+		 RESULT = new NodoMenorOIgual(e1, e2); System.out.println("Regla 34 --> E <= E"); 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("comparison",19, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -851,7 +875,7 @@ class CUP$parser$actions {
 		int e2left = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int e2right = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		NodoExpresion e2 = (NodoExpresion)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		 RESULT = new NodoCondicion(e1, ">=", e2); System.out.println("Regla 34 --> E >= E"); 
+		 RESULT = new NodoMayorOIgual(e1, e2); System.out.println("Regla 34 --> E >= E"); 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("comparison",19, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -866,7 +890,7 @@ class CUP$parser$actions {
 		int e2left = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int e2right = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		NodoExpresion e2 = (NodoExpresion)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		 RESULT = new NodoCondicion(e1, "!=", e2); System.out.println("Regla 34 --> E != E"); 
+		 RESULT = new NodoDistinto(e1, e2); System.out.println("Regla 34 --> E != E"); 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("comparison",19, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -893,7 +917,7 @@ class CUP$parser$actions {
 		int bleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
 		int bright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
 		ArrayList<NodoSentencia> b = (ArrayList<NodoSentencia>)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
-		RESULT = new NodoIf((NodoExpresionBooleana)e, b, null);System.out.println("Regla 41 --> If expresión lógica {bloque}");
+		RESULT = new NodoIf(e, b, null);System.out.println("Regla 41 --> If expresión lógica {bloque}");
               CUP$parser$result = parser.getSymbolFactory().newSymbol("decisiones",11, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-4)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -911,7 +935,7 @@ class CUP$parser$actions {
 		int b2left = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
 		int b2right = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
 		ArrayList<NodoSentencia> b2 = (ArrayList<NodoSentencia>)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
-		RESULT = new NodoIf((NodoExpresionBooleana)e, b1, b2);System.out.println("Regla 42 --> If expresión lógica {bloque} else {bloque}");
+		RESULT = new NodoIf(e, b1, b2);System.out.println("Regla 42 --> If expresión lógica {bloque} else {bloque}");
               CUP$parser$result = parser.getSymbolFactory().newSymbol("decisiones",11, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-8)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -919,7 +943,7 @@ class CUP$parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 45: // salida ::= PRINT CONST_STRING 
             {
-              NodoSentencia RESULT =null;
+              NodoPrint RESULT =null;
 		int sleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int sright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String s = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;

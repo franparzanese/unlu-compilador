@@ -1,26 +1,48 @@
+</ prueba.txt />
+
+</ Recuerden modificar de este archivo todo componente lexico que definieron
+diferente en su lenguaje, como operador de asignacion, apertura y cierre de
+ciclos y condicionales, operadores logicos, nombres de tipos, etc. />
+
+
+DECLARE
+[suma, contador, d1] := [FLOAT, INT, FLOAT]
+[actual, contar, palabra] := [FLOAT, FLOAT, STRING]
+[var] := [INT]
+ENDDECLARE
+
+
 BEGIN.PROGRAM
 
-LET contador DEFAULT 5
-LET mensaje DEFAULT 1
-LET contador2 DEFAULT 5
+PRINT  "Prueba.txt Analizador Lexico"
 
-while (contador > 0) {
+contador = 0
+suma = 7.5
+contar = 18.22
 
-    PRINT "iteracion"
+while (contador <= 92) {
+	contador = contador + 1
+	actual = (contador / 0.342) + (contador * (contar + 4.67))
+	suma = suma + actual
+	}
+PRINT  "La variable suma"
 
-    if (contador > 2 or contador2 > 2) {
 
-        PRINT "contador mayor a dos"
-
-    }
-    else {
-
-        PRINT "contador menor o igual a dos"
-
-    }
-
-    contador = contador - 1
-
+if (actual > 2 and actual <> 0){
+	PRINT  "actual es mayor q"
+	palabra = "es mayor"
 }
+else{
+	PRINT "no es mayor que 2"
+}
+
+
+
+
+
+</ LET Grupo 6, eliminar si no es tu tema especial />
+
+LET suma:contador*5+2, var, d1:(contar*actual)/(5-2) DEFAULT 2.5*7
+LET suma DEFAULT 7
 
 END.PROGRAM

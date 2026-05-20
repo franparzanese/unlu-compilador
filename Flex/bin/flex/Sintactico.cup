@@ -2,7 +2,6 @@ package flex;
 
 import ast.*;
 import java.util.ArrayList;
-import java.util.List;
 import java_cup.runtime.*;
 
 
@@ -20,16 +19,16 @@ action code
 {:
 	public ArrayList<NodoTerminoLet> a;
 	public ArrayList<NodoSentencia> b;
+    public ArrayList<NodoTipo> c;
+    public ArrayList<NodoIdentificador> d;
 :}
 
 
 /*Declaracion de Terminales */
 terminal int CONST_INT;
 terminal float CONST_FLOAT;
-terminal String ID, CONST_STRING;
-terminal INT, FLOAT, STRING, IGUAL, OP_MAY, OP_IGUAL, OP_MEN, OP_MENIG, OP_MAYIG, OP_DIS, OP_SUMA, OP_RES, OP_MUL, OP_DIV, AND, OR, COR_ABRE, COR_CIE,
-PAR_ABRE, PAR_CIE, LLAV_ABRE, LLAV_CIE, DOSPUN_IG, COMA, DOSPUNTOS, DECLARE, ENDDECLARE, BEGINPROGRAM, ENDPROGRAM, MIENTRAS, IF, ELSE, PRINT, LET, DEFAULT;
-
+terminal String ID, INT, FLOAT, STRING, CONST_STRING, IGUAL, OP_MAY, OP_IGUAL, OP_MEN, OP_MENIG, OP_MAYIG, OP_DIS, OP_SUMA, OP_RES, OP_MUL, OP_DIV, AND, OR, COR_ABRE, COR_CIE,
+PAR_ABRE, PAR_CIE, LLAV_ABRE, LLAV_CIE, DOSPUN_IG, COMA, DOSPUNTOS, DECLARE, ENDDECLARE, BEGINPROGRAM, ENDPROGRAM, WHILE, IF, ELSE, PRINT, LET, DEFAULT;
 
 /*Declaracion de No Terminales*/
 non terminal prog;
@@ -37,28 +36,28 @@ non terminal declaracion;
 non terminal NodoPrograma programa;
 non terminal declaraciones;
 non terminal linea_declaracion;
-non terminal declaracion_var;
-non terminal tipo;
+non terminal ArrayList<NodoTipo> declaracion_var;
+non terminal NodoTipo tipo;
 non terminal ArrayList<NodoSentencia> bloque_sentencias;
 non terminal NodoSentencia sentencia;
-non terminal asignacion;
-non terminal mientras;
-non terminal decisiones;
-non terminal salida;
+non terminal NodoAsignacion asignacion;
+non terminal NodoMientras while;
+non terminal NodoIf decisiones;
+non terminal NodoPrint salida;
 non terminal NodoLet let;
 non terminal NodoExpresion expresion;
 non terminal NodoExpresion termino;
 non terminal NodoExpresion factor;
-non terminal NodoExpresion exp_logica;
-non terminal condicion;
-non terminal op;
+non terminal NodoExpresionBooleana logical;
+non terminal NodoExpresionBooleana conjunction;
+non terminal NodoExpresionBooleana comparison;
 non terminal ArrayList<NodoTerminoLet> lista_let;
 non terminal NodoTerminoLet termino_let;
 
-start with programa;
+start with prog;
 
 
-prog ::= declaracion programa {: System.out.println("prog Regla 0 Compila correctamente llegando al simbolo start");:};
+prog ::= declaracion:d programa:p {: RESULT = p; System.out.println("prog Regla 0 Compila correctamente llegando al simbolo start");:};
 
 declaracion ::= DECLARE declaraciones ENDDECLARE {:System.out.println("Regla 1 --> Declaración"); :};
 
@@ -67,12 +66,20 @@ declaraciones ::= linea_declaracion {:System.out.println("Regla 2 --> Linea de d
 
 linea_declaracion ::= COR_ABRE declaracion_var COR_CIE {:System.out.println("Regla 4 --> Declaración variables"); :};
 
-declaracion_var::= ID COR_CIE DOSPUN_IG COR_ABRE tipo {:System.out.println("Regla 5 --> Id ] := [ tipo"); :}
-  | ID COMA declaracion_var COMA tipo {:System.out.println("Regla 6 --> Id declaración variables tipo"); :};
+declaracion_var::= ID:i COR_CIE DOSPUN_IG COR_ABRE tipo:t {: c = new ArrayList<NodoTipo>();
+                                                             d = new ArrayList<NodoIdentificador>();
+                                                             c.add(t);
+                                                             d.add(new NodoIdentificador(i));
+                                                             RESULT = c;
+                                                             System.out.println("Regla 5 --> Id ] := [ tipo"); :}
+  | ID:i COMA declaracion_var:dv COMA tipo:t {: dv.add(t);
+                                                d.add(new NodoIdentificador(i));
+                                                RESULT = dv;
+                                                System.out.println("Regla 6 --> Id declaración variables tipo"); :};
 
-tipo ::= FLOAT {:System.out.println("Regla 7 --> Float"); :}
-	| INT {:System.out.println("Regla 8 --> Integer"); :}
-	| STRING {:System.out.println("Regla 9 --> String"); :};
+tipo ::= FLOAT {: RESULT = new NodoTipoFloat(); System.out.println("Regla 7 --> Float"); :}
+	| INT {: RESULT = new NodoTipoInt(); System.out.println("Regla 8 --> Integer"); :}
+	| STRING {: RESULT = new NodoTipoString(); System.out.println("Regla 9 --> String"); :};
 
 programa ::= BEGINPROGRAM bloque_sentencias:s ENDPROGRAM {: RESULT = new NodoPrograma(s); System.out.println("Regla 10 --> Begin bloque de sentencias End"); :};
 
@@ -84,53 +91,76 @@ bloque_sentencias ::= sentencia:s {: b = new ArrayList<NodoSentencia>();
                                         RESULT = bs;
 				                        System.out.println("Regla 12 --> Bloque de sentencias"); :};
 
-sentencia ::= asignacion {:System.out.println("Regla 13 --> Asignación"); :}
-	| mientras {:System.out.println("Regla 14 --> Mientras"); :}
-	| decisiones {:System.out.println("Regla 15 --> Decisiones"); :} 
-	| salida {:System.out.println("Regla 16 --> Salida"); :}
+sentencia ::= asignacion:a {: RESULT = a; System.out.println("Regla 13 --> Asignación"); :}
+	| while:m {: RESULT = m; System.out.println("Regla 14 --> Mientras"); :}
+	| decisiones:d {: RESULT = d; System.out.println("Regla 15 --> Decisiones"); :}
+	| salida:s {: RESULT = s; System.out.println("Regla 16 --> Salida"); :}
 	| let:l {: RESULT = l; System.out.println("Regla 17 --> Let"); :};
 
-asignacion ::= ID :i IGUAL expresion {:
-	TS.getInstance().updateTypeSymbol(i, "NUMERIC");
-	System.out.println("Regla 18 --> Id = Expresión");
-:} | ID :i IGUAL CONST_STRING {:
-	TS.getInstance().updateTypeSymbol(i, "STRING");
-	System.out.println("Regla 19 --> Id = constante");
+asignacion ::= ID:i IGUAL expresion:e
+{:
+    TS.getInstance().updateTypeSymbol(i, "NUMERIC");
+
+    RESULT = new NodoAsignacion(
+        new NodoIdentificador(i),
+        e
+    );
+
+    System.out.println("Regla 18 --> Id = Expresión");
+:}
+
+| ID:i IGUAL CONST_STRING:s
+{:
+    TS.getInstance().updateTypeSymbol(i, "STRING");
+
+    RESULT = new NodoAsignacion(
+        new NodoIdentificador(i),
+        new NodoConstanteString(s)
+    );
+
+    System.out.println("Regla 19 --> Id = constante");
 :};
 
 expresion ::= expresion:e OP_SUMA termino:t {: RESULT = new NodoSuma(e, t); System.out.println("Regla 20 --> E+T"); :}
     	|expresion:e OP_RES termino:t {: RESULT = new NodoResta(e, t); System.out.println("Regla 21 --> E-T"); :}
-	|termino {: System.out.println("Regla 22 --> Término"); :};
+	|termino:t {: RESULT = t; System.out.println("Regla 22 --> Término"); :};
 
 termino ::= termino:t OP_MUL factor:f {: RESULT = new NodoMultiplicacion(t, f); System.out.println("Regla 23 --> T*F"); :}
 	|termino:t OP_DIV factor:f {: RESULT = new NodoDivision(t, f); System.out.println("Regla 24 --> T/F"); :}
-	|factor:f {: System.out.println("Regla 25 --> factor valor = " + f); :};
+	|factor:f {: RESULT = f; System.out.println("Regla 25 --> factor valor = " + f); :};
 
 factor ::= CONST_INT :ent {: RESULT = new NodoConstante(ent); System.out.println("Regla 26 --> Constante entera = " + ent); :}
-	| CONST_FLOAT :flo {: RESULT = new NodoConstante(Math.round(flo)); System.out.println("Regla 27 --> Constante Float"); :} 
+	| CONST_FLOAT :flo {: RESULT = new NodoConstanteFloat(flo); System.out.println("Regla 27 --> Constante Float"); :} 
 	| ID :id {: RESULT = new NodoIdentificador(id); System.out.println("Regla 28 --> Variable= " + id); :}
 	|PAR_ABRE expresion:e PAR_CIE {: RESULT = e; System.out.println("Regla 29 --> (Expresión)"); :};
 
-mientras ::= MIENTRAS exp_logica LLAV_ABRE bloque_sentencias LLAV_CIE {:System.out.println("Regla 30 --> Mientras expresión lógica {bloque}"); :};
+while ::= WHILE logical:e LLAV_ABRE bloque_sentencias:b LLAV_CIE
+{:
+    RESULT = new NodoMientras(e, b);
+    System.out.println("Regla 30 --> Mientras expresión lógica {bloque}");
+:};
 
-exp_logica ::= condicion {:System.out.println("Regla 31 --> Condición"); :}
-	| condicion AND condicion {:System.out.println("Regla 32 --> Condición and condición"); :}
-	| condicion OR condicion {:System.out.println("Regla 33 --> Condición or condición"); :}
-	| PAR_ABRE exp_logica PAR_CIE {:System.out.println("Regla 33.1 --> ( Expresión lógica )"); :};
+logical ::= conjunction:c {: RESULT = c; System.out.println("Regla 31 --> Condición"); :}
+          | conjunction:c OR logical:l {: RESULT = new NodoOr(c, l); System.out.println("Regla 33 --> Condición or condición"); :}
+          ;
 
-condicion ::= expresion op expresion {:System.out.println("Regla 34 --> E operador E"); :};
+conjunction ::= comparison:c {: RESULT = c; System.out.println("Regla 32 --> Conjunción"); :}
+             | comparison:c AND conjunction:l {: RESULT = new NodoAnd(c, l); System.out.println("Regla 32 --> Condición and condición"); :}
+             ;
 
-op::= OP_MAY {:System.out.println("Regla 35 --> Operador mayor"); :}
-	| OP_MEN {:System.out.println("Regla 36 --> Operador menor"); :}
-	| OP_IGUAL {:System.out.println("Regla 37 --> Operador igual"); :}
-	| OP_MENIG {:System.out.println("Regla 38 --> Operador menor igual"); :}
-	| OP_MAYIG {:System.out.println("Regla 39 --> Operador mayor igual"); :}
-	| OP_DIS {:System.out.println("Regla 40 --> Operador distinto"); :};
+comparison ::= expresion:e1 OP_MAY expresion:e2 {: RESULT = new NodoMayor(e1, e2); System.out.println("Regla 34 --> E > E"); :}
+             | expresion:e1 OP_MEN expresion:e2 {: RESULT = new NodoMenor(e1, e2); System.out.println("Regla 34 --> E < E"); :}
+             | expresion:e1 OP_IGUAL expresion:e2 {: RESULT = new NodoIgual(e1, e2); System.out.println("Regla 34 --> E == E"); :}
+             | expresion:e1 OP_MENIG expresion:e2 {: RESULT = new NodoMenorOIgual(e1, e2); System.out.println("Regla 34 --> E <= E"); :}
+             | expresion:e1 OP_MAYIG expresion:e2 {: RESULT = new NodoMayorOIgual(e1, e2); System.out.println("Regla 34 --> E >= E"); :}
+             | expresion:e1 OP_DIS expresion:e2 {: RESULT = new NodoDistinto(e1, e2); System.out.println("Regla 34 --> E != E"); :}
+             | PAR_ABRE logical:e PAR_CIE {: RESULT = e; System.out.println("Regla 33.1 --> ( Expresión lógica )"); :}
+             ;
 
-decisiones ::= IF exp_logica LLAV_ABRE bloque_sentencias LLAV_CIE {:System.out.println("Regla 41 --> If expresión lógica {bloque}"); :}
-	|IF exp_logica LLAV_ABRE bloque_sentencias LLAV_CIE ELSE LLAV_ABRE bloque_sentencias LLAV_CIE {:System.out.println("Regla 42 --> If expresión lógica {bloque} else {bloque} "); :};
+decisiones ::= IF logical:e LLAV_ABRE bloque_sentencias:b LLAV_CIE{:RESULT = new NodoIf(e, b, null);System.out.println("Regla 41 --> If expresión lógica {bloque}");:}
+	 | IF logical:e LLAV_ABRE bloque_sentencias:b1 LLAV_CIE ELSE LLAV_ABRE bloque_sentencias:b2 LLAV_CIE{:RESULT = new NodoIf(e, b1, b2);System.out.println("Regla 42 --> If expresión lógica {bloque} else {bloque}");:};
 
-salida::= PRINT CONST_STRING {:System.out.println("Regla 43 --> Print constante"); :};
+salida ::= PRINT CONST_STRING:s{:System.out.println("ENTRO A PRINT: " + s);RESULT = new NodoPrint(new NodoConstanteString(s));System.out.println("Regla 43 --> Print constante");:};
 
 let ::= LET lista_let:l DEFAULT expresion:e {: RESULT = new NodoLet(l, e); System.out.println("Regla 44 --> Let lista let Default expresion"); :};
 
