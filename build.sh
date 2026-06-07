@@ -1,31 +1,24 @@
 #!/bin/bash
 
-# Limpieza.
-rm -rf build/
+set -euo pipefail
 
-# Arma el lexer
+# Genera el analizador léxico.
 jflex --nobak -d src/flex/ Lexico.flex
 
-# Armar parser luego de hacer cambios en Sintactico.cup:
+# Genera el analizador sintáctico.
 java -cp lib/java-cup-11b.jar java_cup.Main Sintactico.cup
-mv parser.java src/flex/
-mv sym.java src/flex/
+mv parser.java sym.java src/flex/
 
-# Paso 1 - Compilar:
-mkdir -p build/classes
-javac -cp "lib/*" -d build/classes/ $(find src/ -name "*.java")
+# Compila el proyecto.
+mkdir build
+javac -cp "lib/java-cup-11b-runtime.jar" -d build/ $(find src/ -name "*.java")
+(
+    cd build/
+    jar xf ../lib/java-cup-11b-runtime.jar
+)
 
-# Paso 2 - Mezclar todo:
-mkdir -p build/fat
-cp -r build/classes/* build/fat/
-
-# PRUEBA:
-cd build/fat/
-jar xf ../../lib/java-cup-11b-runtime.jar
-cd ../../
-
-# Paso 3 - Crear JAR final ejecutable:
-jar cfe compilador.jar flex.Main -C build/fat/ .
+# Genera el JAR ejecutable.
+jar cfe dist/compilador.jar flex.Main -C build/ .
 rm -rf build/
-mkdir -p dist
-mv compilador.jar dist/
+
+echo "Build completado. El ejecutable se encuentra en dist/compilador.jar."
