@@ -25,15 +25,15 @@ while (contador <= 92) {
 	actual = (contador / 0.342) + (contador * (contar + 4.67))
 	suma = suma + actual
 	}
-PRINT  "La variable suma es de tipo float"
+PRINT  "La variable suma es tipo float"
 
 
-if (actual > 2 and actual <> 0){
-	PRINT  "actual es mayor que 2 y distinto de cero"
+if (actual > 2 and actual <> 4){
+	PRINT  "actual es mayor a 2 y no es 4"
 	palabra = "es mayor"
 }
 else{
-	PRINT "no es mayor que 2"
+	PRINT "actual no es mayor a 2 o es 4"
 }
 
 

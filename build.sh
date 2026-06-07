@@ -4,7 +4,7 @@
 rm -rf build/
 
 # Arma el lexer
-jflex -d src/flex/ Lexico.flex
+jflex --nobak -d src/flex/ Lexico.flex
 
 # Armar parser luego de hacer cambios en Sintactico.cup:
 java -cp lib/java-cup-11b.jar java_cup.Main Sintactico.cup

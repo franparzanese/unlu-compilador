@@ -172,5 +172,5 @@ lista_let::= termino_let:t {: a = new ArrayList<NodoTerminoLet>();
                                         RESULT = l;
 				                        System.out.println("Regla 46 --> Lista let, término let "); :};
 
-termino_let ::= ID:id {: RESULT = new NodoTerminoLet(new NodoIdentificador(id)); System.out.println("Regla 47 --> Variable= " + id); :} 
-	| ID:id DOSPUNTOS expresion:e {: RESULT = new NodoTerminoLet(new NodoIdentificador(id), e); System.out.println("Regla 48 --> Id: expresión"); :};
+termino_let ::= ID:id {: TS.getInstance().updateTypeSymbol(id, "NUMERIC"); RESULT = new NodoTerminoLet(new NodoIdentificador(id)); System.out.println("Regla 47 --> Variable= " + id); :} 
+	| ID:id DOSPUNTOS expresion:e {: TS.getInstance().updateTypeSymbol(id, "NUMERIC"); RESULT = new NodoTerminoLet(new NodoIdentificador(id), e); System.out.println("Regla 48 --> Id: expresión"); :};

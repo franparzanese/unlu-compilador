@@ -1,33 +1,32 @@
 package flex;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
 import java.awt.Color;
-import javax.swing.JMenuItem;
-import javax.swing.JTextArea;
+import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
-import java.awt.event.ActionEvent;
-import javax.swing.JScrollPane;
+
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
-import utils.MessageConsole;
-
 import ast.NodoPrograma;
-import java.io.FileWriter;
-import java.io.PrintWriter;
+import utils.MessageConsole;
 
 public class Main {
 
@@ -157,7 +156,7 @@ public class Main {
 						pw.println(programa.graficar());
 						archivo.close();
 					} catch (Exception e) {
-						System.out.println(e);
+						System.out.println("Error al crear el árbol del AST.");
 					}
 					String cmd = "/usr/bin/dot -Tpng dist/arbol.dot -o dist/arbol.png";
 					Runtime.getRuntime().exec(cmd);

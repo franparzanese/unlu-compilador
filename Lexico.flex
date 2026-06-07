@@ -79,25 +79,25 @@ COMENTARIO = {COM_ABRE}({LETRA}|{DIGITO}|{ESPACIO}|{FIN_LINEA}|{COM}|{PUNTO}|{CO
 					}
 {CONST_INT}			{
 						TS ts = TS.getInstance();
-						ts.addSymbol("_" + yytext(), "CONST_INT", "-", yytext(), "-");
+						ts.addSymbol("_" + yytext(), "CONST_INT", "NUMERIC", yytext(), "-");
 						return new Symbol(sym.CONST_INT, Integer.parseInt(yytext()));
 					}
 {CONST_STRING}		{
 						if (yytext().length() <= 32) {
 							TS ts = TS.getInstance();
-							ts.addSymbol("_" + yytext(), "CONST_STRING", "-", yytext(), Integer.toString(yytext().length()));
+							ts.addSymbol("_" + yytext(), "CONST_STRING", "STRING", yytext(), Integer.toString(yytext().length()));
 							return new Symbol(sym.CONST_STRING, yytext());
 						} else {
-							throw new Error("La constante string <" + yytext() + "> en la línea " + yyline + " supera el límite de 30 caracteres: tiene " + (yytext().length() - 2));
+							throw new Error("La constante string <" + yytext() + "> en la línea " + (yyline + 1) + " supera el límite de 30 caracteres: tiene " + (yytext().length() - 2));
 						}
 					}
 {CONST_FLOAT}		{
 						TS ts = TS.getInstance();
-						ts.addSymbol("_" + yytext(), "CONST_FLOAT", "-", yytext(), "-");
+						ts.addSymbol("_" + yytext(), "CONST_FLOAT", "NUMERIC", yytext(), "-");
 						return new Symbol(sym.CONST_FLOAT, Float.parseFloat(yytext()));
 					}
 
 }
 
-[^]					{throw new Error("Caracter no permitido: <" + yytext() + "> en la línea " + yyline);}
+[^]					{throw new Error("Caracter no permitido: <" + yytext() + "> en la línea " + (yyline + 1));}
 <<EOF>>				{return new Symbol(sym.EOF);}

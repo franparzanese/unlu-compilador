@@ -1006,7 +1006,7 @@ class CUP$parser$actions {
 		int idleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int idright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String id = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		 RESULT = new NodoTerminoLet(new NodoIdentificador(id)); System.out.println("Regla 47 --> Variable= " + id); 
+		 TS.getInstance().updateTypeSymbol(id, "NUMERIC"); RESULT = new NodoTerminoLet(new NodoIdentificador(id)); System.out.println("Regla 47 --> Variable= " + id); 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("termino_let",21, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1021,7 +1021,7 @@ class CUP$parser$actions {
 		int eleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int eright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		NodoExpresion e = (NodoExpresion)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		 RESULT = new NodoTerminoLet(new NodoIdentificador(id), e); System.out.println("Regla 48 --> Id: expresión"); 
+		 TS.getInstance().updateTypeSymbol(id, "NUMERIC"); RESULT = new NodoTerminoLet(new NodoIdentificador(id), e); System.out.println("Regla 48 --> Id: expresión"); 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("termino_let",21, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
