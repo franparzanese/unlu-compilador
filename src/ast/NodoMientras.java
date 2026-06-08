@@ -1,13 +1,13 @@
 package ast;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class NodoMientras extends NodoSentencia {
 
-    private final NodoExpresion condicion;
-    private final ArrayList<NodoSentencia> bloqueSentencias;
+    private final NodoExpresionBooleana condicion;
+    private final List<NodoSentencia> bloqueSentencias;
 
-    public NodoMientras(NodoExpresion condicion, ArrayList<NodoSentencia> bloqueSentencias) {
+    public NodoMientras(NodoExpresionBooleana condicion, List<NodoSentencia> bloqueSentencias) {
         super("WHILE");
         this.condicion = condicion;
         this.bloqueSentencias = bloqueSentencias;
@@ -22,13 +22,13 @@ public class NodoMientras extends NodoSentencia {
         resultado.append(super.graficar(idPadre));
 
         // Grafica la condición como hija del WHILE
-        if (this.condicion != null) {
-            resultado.append(this.condicion.graficar(miId));
+        if (condicion != null) {
+            resultado.append(condicion.graficar(miId));
         }
 
         // Grafica cada sentencia del bloque como hija del WHILE
-        if (this.bloqueSentencias != null) {
-            for (NodoSentencia sentencia : this.bloqueSentencias) {
+        if (bloqueSentencias != null) {
+            for (NodoSentencia sentencia : bloqueSentencias) {
                 if (sentencia != null) {
                     resultado.append(sentencia.graficar(miId));
                 }

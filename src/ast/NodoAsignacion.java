@@ -1,7 +1,7 @@
 package ast;
 
 public class NodoAsignacion extends NodoSentencia {
-    private NodoIdentificador identificador;
+    private final NodoIdentificador identificador;
     private NodoExpresion expresion;
 
     public NodoAsignacion(NodoIdentificador identificador, NodoExpresion expresion) {

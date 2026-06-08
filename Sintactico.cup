@@ -31,7 +31,7 @@ terminal String ID, INT, FLOAT, STRING, CONST_STRING, IGUAL, OP_MAY, OP_IGUAL, O
 PAR_ABRE, PAR_CIE, LLAV_ABRE, LLAV_CIE, DOSPUN_IG, COMA, DOSPUNTOS, DECLARE, ENDDECLARE, BEGINPROGRAM, ENDPROGRAM, WHILE, IF, ELSE, PRINT, LET, DEFAULT;
 
 /*Declaracion de No Terminales*/
-non terminal prog;
+non terminal NodoPrograma prog;
 non terminal declaracion;
 non terminal NodoPrograma programa;
 non terminal declaraciones;

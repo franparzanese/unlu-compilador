@@ -1,12 +1,12 @@
 package ast;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class NodoLet extends NodoSentencia {
-    private final ArrayList<NodoTerminoLet> listaLet;
+    private final List<NodoTerminoLet> listaLet;
     private final NodoExpresion valorDefault;
 
-    public NodoLet(ArrayList<NodoTerminoLet> listaLet, NodoExpresion valorDefault) {
+    public NodoLet(List<NodoTerminoLet> listaLet, NodoExpresion valorDefault) {
         super("LET");
         this.listaLet = listaLet;
         this.valorDefault = valorDefault;
@@ -21,9 +21,9 @@ public class NodoLet extends NodoSentencia {
         resultado.append(super.graficar(idPadre));
 
         // Loop para recorrer los términos LET.
-        for (NodoTerminoLet terminoLet : this.listaLet) {
+        for (NodoTerminoLet terminoLet : listaLet) {
             if (terminoLet.getExpresion() == null) {
-                terminoLet.setExpresion(this.valorDefault);
+                terminoLet.setExpresion(valorDefault);
             }
             resultado.append(terminoLet.graficar(miId));
         }
