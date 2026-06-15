@@ -1,13 +1,14 @@
 package ast;
 
-public class NodoExpresionBinaria extends NodoExpresion {
-    private final NodoExpresion izquierda;
-    private final NodoExpresion derecha;
+public abstract class NodoExpresionBinaria extends NodoExpresion {
+    protected final NodoExpresion izquierda;
+    protected final NodoExpresion derecha;
 
     public NodoExpresionBinaria(String nombre, NodoExpresion izquierda, NodoExpresion derecha) {
         super(nombre);
         this.izquierda = izquierda;
         this.derecha = derecha;
+        this.nombreEnTS = null;
     }
 
     @Override

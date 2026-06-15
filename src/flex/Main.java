@@ -151,6 +151,14 @@ public class Main {
 					parser sintactico = new parser(Lexer);
 					NodoPrograma programa = (NodoPrograma) sintactico.parse().value;
 					try {
+						FileWriter archivo = new FileWriter("dist/assembler.asm");
+						PrintWriter pw = new PrintWriter(archivo);
+						pw.println(programa.generaAssembler());
+						archivo.close();
+					} catch (Exception e) {
+						System.out.println("Error al generar el código assembler.");
+					}
+					try {
 						FileWriter archivo = new FileWriter("dist/arbol.dot");
 						PrintWriter pw = new PrintWriter(archivo);
 						pw.println(programa.graficar());

@@ -9,6 +9,7 @@ public final class TS {
 
 	private static TS instance;
 	private ArrayList<ArrayList<Object>> data = new ArrayList<ArrayList<Object>>();
+	private static int cantindadDeAuxiliares = 0;
 
 	private TS() {}
 
@@ -52,6 +53,20 @@ public final class TS {
 		newData.add(valor);
 		newData.add(longitud);
 		data.add(newData);
+	}
+
+	public String addAuxiliar(Object token,
+						   Object tipo,
+						   Object valor,
+						   Object longitud) {
+		TS.cantindadDeAuxiliares++;
+		String nombre = "_@aux" + TS.cantindadDeAuxiliares;
+		addSymbol(nombre,
+				  token,
+				  tipo,
+				  valor,
+				  longitud);
+		return nombre;
 	}
 
 }

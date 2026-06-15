@@ -25,4 +25,11 @@ public class NodoAsignacion extends NodoSentencia {
     public void setExpresion(NodoExpresion expresion) {
         this.expresion = expresion;
     }
+
+    @Override
+    public void generaAssembler(StringBuilder asm) {
+        expresion.generaAssembler(asm);
+        asm.append("FLD " + expresion.nombreEnTS + "\n");
+        asm.append("FSTP " + identificador.nombreEnTS + "\n");
+    }
 }

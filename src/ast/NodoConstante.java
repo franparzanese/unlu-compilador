@@ -6,10 +6,16 @@ public class NodoConstante extends NodoExpresion {
     public NodoConstante(int valor) {
         super("CTE");
         this.valor = valor;
+        this.nombreEnTS = "_" + valor;
     }
 
     @Override
     public String getDescripcionNodo() {
         return "CTE: " + Integer.toString(valor);
+    }
+
+    @Override
+    public void generaAssembler(StringBuilder asm) {
+        /** @TODO Implementar */
     }
 }

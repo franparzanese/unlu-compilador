@@ -1,5 +1,6 @@
 package ast;
 
+import flex.TS;
 import java.util.List;
 
 public class NodoPrograma extends Nodo {
@@ -32,5 +33,45 @@ public class NodoPrograma extends Nodo {
 
         return resultado.toString();
     }
-}
 
+    private String generaData() {
+        StringBuilder dataAsm = new StringBuilder();
+        Object[][] simbolos = TS.getInstance().getData();
+        for (Object[] fila : simbolos) {
+            String nombre = fila[0].toString();
+            String token = fila[1].toString();
+            String valor = fila[3].toString();
+            if (token.equals("ID")) {
+                dataAsm.append(nombre).append(" dd ?\n");
+            } else if (token.equals("CONST_INT")) {
+                dataAsm.append(nombre).append(" dd ").append(valor).append(".0\n");
+            } else if (token.equals("CONST_FLOAT")) {
+                dataAsm.append(nombre).append(" dd ").append(valor).append("\n");
+            } else if (token.equals("CONST_STRING")) {
+                String etiqueta = nombre.replace("\"", "").replace("_", "T_").replace(" ", "_");
+                dataAsm.append(etiqueta).append(" db ").append(valor).append(",'$'\n");
+            }
+        }
+        return dataAsm.toString();
+    }
+
+    public String generaAssembler() {
+        StringBuilder asm = new StringBuilder();
+        asm.append(".MODEL LARGE\n");
+        asm.append(".386\n");
+        asm.append(".STACK 200h\n\n");
+        asm.append(".DATA\n\n");
+        asm.append(generaData()).append("\n");
+        asm.append(".CODE\n\n");
+        asm.append("MOV AX,@DATA\n");
+        asm.append("MOV DS,AX\n");
+        asm.append("MOV ES,AX\n\n");
+        for (NodoSentencia sentencia : sentencias) {
+            sentencia.generaAssembler(asm);
+        }
+        asm.append("\nMOV AX,4C00h\n");
+        asm.append("INT 21h\n\n");
+        asm.append("END\n");
+        return asm.toString();
+    }
+}

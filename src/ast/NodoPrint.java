@@ -17,4 +17,9 @@ public class NodoPrint extends NodoSentencia {
         return super.graficar(idPadre)
                 + expresion.graficar(miId);
     }
+
+    @Override
+    public void generaAssembler(StringBuilder asm) {
+        /** @TODO Implementar */
+    }
 }

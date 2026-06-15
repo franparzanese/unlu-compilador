@@ -50,6 +50,9 @@ public class NodoCiclo extends NodoSentencia {
 */
         return resultado.toString();
     }
+
+    @Override
+    public void generaAssembler(StringBuilder asm) {
+        /** @TODO Implementar */
+    }
 }
-
-

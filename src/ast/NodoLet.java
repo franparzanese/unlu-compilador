@@ -30,4 +30,9 @@ public class NodoLet extends NodoSentencia {
 
         return resultado.toString();
     }
+
+    @Override
+    public void generaAssembler(StringBuilder asm) {
+        /** @TODO Implementar */
+    }
 }
