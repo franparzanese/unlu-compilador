@@ -48,6 +48,7 @@ COMENTARIO = {COM_ABRE}({LETRA}|{DIGITO}|{ESPACIO}|{FIN_LINEA}|{COM}|{PUNTO}|{CO
 "<>"				{return new Symbol(sym.OP_DIS, yytext());}
 "and"				{return new Symbol(sym.AND, yytext());}
 "or"				{return new Symbol(sym.OR, yytext());}
+"not"               {return new Symbol(sym.NOT, yytext());}
 "+"					{return new Symbol(sym.OP_SUMA, yytext());}
 "-"					{return new Symbol(sym.OP_RES, yytext());}
 "*"					{return new Symbol(sym.OP_MUL, yytext());}
@@ -77,25 +78,31 @@ COMENTARIO = {COM_ABRE}({LETRA}|{DIGITO}|{ESPACIO}|{FIN_LINEA}|{COM}|{PUNTO}|{CO
 						ts.addSymbol(yytext(), "ID", "-", "-", "-");
 						return new Symbol(sym.ID, yytext());
 					}
+
+{CONST_FLOAT}		{
+						TS ts = TS.getInstance();
+						ts.addSymbol( "_cte" + yytext().replace(".", "_"), "CONST_FLOAT", "NUMERIC", yytext(), "-");
+						return new Symbol(sym.CONST_FLOAT, Float.parseFloat(yytext()));
+					}
 {CONST_INT}			{
 						TS ts = TS.getInstance();
-						ts.addSymbol("_" + yytext(), "CONST_INT", "NUMERIC", yytext(), "-");
+						ts.addSymbol("_cte" + yytext(), "CONST_INT", "NUMERIC", yytext(), "-");
 						return new Symbol(sym.CONST_INT, Integer.parseInt(yytext()));
 					}
-{CONST_STRING}		{
+{CONST_STRING} 		{
 						if (yytext().length() <= 32) {
 							TS ts = TS.getInstance();
-							ts.addSymbol("_" + yytext(), "CONST_STRING", "STRING", yytext(), Integer.toString(yytext().length()));
+
+							String nombre = "_" + yytext().replace("\"", "").replace(" ", "_");
+
+							ts.addSymbol(nombre,"CONST_STRING","STRING",yytext(),Integer.toString(yytext().length()));
+
 							return new Symbol(sym.CONST_STRING, yytext());
 						} else {
 							throw new Error("La constante string <" + yytext() + "> en la línea " + (yyline + 1) + " supera el límite de 30 caracteres: tiene " + (yytext().length() - 2));
 						}
 					}
-{CONST_FLOAT}		{
-						TS ts = TS.getInstance();
-						ts.addSymbol("_" + yytext(), "CONST_FLOAT", "NUMERIC", yytext(), "-");
-						return new Symbol(sym.CONST_FLOAT, Float.parseFloat(yytext()));
-					}
+
 
 }
 

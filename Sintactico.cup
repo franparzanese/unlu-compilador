@@ -28,7 +28,7 @@ action code
 terminal int CONST_INT;
 terminal float CONST_FLOAT;
 terminal String ID, INT, FLOAT, STRING, CONST_STRING, IGUAL, OP_MAY, OP_IGUAL, OP_MEN, OP_MENIG, OP_MAYIG, OP_DIS, OP_SUMA, OP_RES, OP_MUL, OP_DIV, AND, OR, COR_ABRE, COR_CIE,
-PAR_ABRE, PAR_CIE, LLAV_ABRE, LLAV_CIE, DOSPUN_IG, COMA, DOSPUNTOS, DECLARE, ENDDECLARE, BEGINPROGRAM, ENDPROGRAM, WHILE, IF, ELSE, PRINT, LET, DEFAULT;
+PAR_ABRE, PAR_CIE, LLAV_ABRE, LLAV_CIE, DOSPUN_IG, COMA, DOSPUNTOS, DECLARE, ENDDECLARE, BEGINPROGRAM, ENDPROGRAM, WHILE, IF, ELSE, PRINT, LET, DEFAULT, NOT;
 
 /*Declaracion de No Terminales*/
 non terminal NodoPrograma prog;
@@ -140,7 +140,8 @@ while ::= WHILE logical:e LLAV_ABRE bloque_sentencias:b LLAV_CIE
     System.out.println("Regla 30 --> Mientras expresión lógica {bloque}");
 :};
 
-logical ::= conjunction:c {: RESULT = c; System.out.println("Regla 31 --> Condición"); :}
+logical ::=NOT logical:e {: RESULT = new NodoNot(e); System.out.println("Regla --> Not expresión lógica"); :} 
+          |  conjunction:c {: RESULT = c; System.out.println("Regla 31 --> Condición"); :}
           | conjunction:c OR logical:l {: RESULT = new NodoOr(c, l); System.out.println("Regla 33 --> Condición or condición"); :}
           ;
 

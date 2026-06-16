@@ -7,7 +7,13 @@ public class NodoConstanteString extends NodoExpresion {
     public NodoConstanteString(String valor) {
         super("CTE_STR");
         this.valor = valor;
-        this.nombreEnTS = "_" + valor;
+        this.nombreEnTS = generarNombre(valor);
+    }
+
+    private String generarNombre(String valor) {
+        return "_" + valor
+                .replace("\"", "")
+                .replace(" ", "_");
     }
 
     @Override
@@ -17,6 +23,6 @@ public class NodoConstanteString extends NodoExpresion {
 
     @Override
     public void generaAssembler(StringBuilder asm) {
-        /** @TODO Implementar */
+        /** No genera código. PRINT usa nombreEnTS. */
     }
 }

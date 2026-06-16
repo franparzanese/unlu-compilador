@@ -48,30 +48,39 @@ public class NodoPrograma extends Nodo {
             } else if (token.equals("CONST_FLOAT")) {
                 dataAsm.append(nombre).append(" dd ").append(valor).append("\n");
             } else if (token.equals("CONST_STRING")) {
-                String etiqueta = nombre.replace("\"", "").replace("_", "T_").replace(" ", "_");
-                dataAsm.append(etiqueta).append(" db ").append(valor).append(",'$'\n");
+                dataAsm.append(nombre).append(" db ").append(valor).append(",'$'\n");
             }
-        }
-        return dataAsm.toString();
+        }        return dataAsm.toString();
     }
 
-    public String generaAssembler() {
-        StringBuilder asm = new StringBuilder();
-        asm.append(".MODEL LARGE\n");
-        asm.append(".386\n");
-        asm.append(".STACK 200h\n\n");
-        asm.append(".DATA\n\n");
-        asm.append(generaData()).append("\n");
-        asm.append(".CODE\n\n");
-        asm.append("MOV AX,@DATA\n");
-        asm.append("MOV DS,AX\n");
-        asm.append("MOV ES,AX\n\n");
-        for (NodoSentencia sentencia : sentencias) {
-            sentencia.generaAssembler(asm);
-        }
-        asm.append("\nMOV AX,4C00h\n");
-        asm.append("INT 21h\n\n");
-        asm.append("END\n");
-        return asm.toString();
+   public String generaAssembler() {
+    StringBuilder asm = new StringBuilder();
+    StringBuilder codigoAsm = new StringBuilder();
+
+   
+    // se agregan los auxiliares a la TS. 
+    for (NodoSentencia sentencia : sentencias) {
+        sentencia.generaAssembler(codigoAsm);
     }
+
+    asm.append(".MODEL LARGE\n");
+    asm.append(".386\n");
+    asm.append(".STACK 200h\n\n");
+
+    asm.append(".DATA\n\n");
+    asm.append(generaData()).append("\n");
+
+    asm.append(".CODE\n\n");
+    asm.append("MOV AX,@DATA\n");
+    asm.append("MOV DS,AX\n");
+    asm.append("MOV ES,AX\n\n");
+
+    asm.append(codigoAsm);
+
+    asm.append("\nMOV AX,4C00h\n");
+    asm.append("INT 21h\n\n");
+    asm.append("END\n");
+
+    return asm.toString();
+}
 }

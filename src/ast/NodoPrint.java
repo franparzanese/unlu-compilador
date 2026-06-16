@@ -11,7 +11,6 @@ public class NodoPrint extends NodoSentencia {
 
     @Override
     protected String graficar(String idPadre) {
-
         final String miId = this.getIdNodo();
 
         return super.graficar(idPadre)
@@ -20,6 +19,8 @@ public class NodoPrint extends NodoSentencia {
 
     @Override
     public void generaAssembler(StringBuilder asm) {
-        /** @TODO Implementar */
+        asm.append("MOV DX, OFFSET ").append(expresion.nombreEnTS).append("\n");
+        asm.append("MOV AH, 9\n");
+        asm.append("INT 21h\n");
     }
 }

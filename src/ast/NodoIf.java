@@ -51,8 +51,36 @@ public class NodoIf extends NodoSentencia {
         return resultado.toString();
     }
 
-    @Override
-    public void generaAssembler(StringBuilder asm) {
-        /** @TODO Implementar */
+  @Override
+public void generaAssembler(StringBuilder asm) {
+
+    // Etiqueta a la que se salta si la condición es falsa
+    String etiquetaElse = flex.TS.getInstance().addEtiqueta();
+
+    // Etiqueta que marca el final del IF
+    String etiquetaFin = flex.TS.getInstance().addEtiqueta();
+
+    // Genera el salto al ELSE cuando la condición es falsa
+    condicion.generarSaltoFalso(asm, etiquetaElse);
+
+    // Genera el bloque THEN
+    for (NodoSentencia sentencia : sentenciasThen) {
+        sentencia.generaAssembler(asm);
     }
+
+    // Salta al final para no ejecutar el ELSE
+    asm.append("JMP ").append(etiquetaFin).append("\n");
+
+    // Inicio del bloque ELSE
+    asm.append(etiquetaElse).append(":\n");
+
+    if (sentenciasElse != null) {
+        for (NodoSentencia sentencia : sentenciasElse) {
+            sentencia.generaAssembler(asm);
+        }
+    }
+
+   
+    asm.append(etiquetaFin).append(":\n");
+}
 }

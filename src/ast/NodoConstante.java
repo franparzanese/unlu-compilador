@@ -6,7 +6,7 @@ public class NodoConstante extends NodoExpresion {
     public NodoConstante(int valor) {
         super("CTE");
         this.valor = valor;
-        this.nombreEnTS = "_" + valor;
+        this.nombreEnTS = "_cte" + valor;
     }
 
     @Override

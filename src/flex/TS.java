@@ -42,18 +42,25 @@ public final class TS {
 	}
 
 	public void addSymbol(Object nombre,
-						   Object token,
-						   Object tipo,
-						   Object valor,
-						   Object longitud) {
-		ArrayList<Object> newData = new ArrayList<Object>();
-		newData.add(nombre);
-		newData.add(token);
-		newData.add(tipo);
-		newData.add(valor);
-		newData.add(longitud);
-		data.add(newData);
-	}
+                      Object token,
+                      Object tipo,
+                      Object valor,
+                      Object longitud) {
+
+    for (ArrayList<Object> fila : data) {
+        if (nombre.toString().equals(fila.get(0).toString())) {
+            return;
+        }
+    }
+
+    ArrayList<Object> newData = new ArrayList<Object>();
+    newData.add(nombre);
+    newData.add(token);
+    newData.add(tipo);
+    newData.add(valor);
+    newData.add(longitud);
+    data.add(newData);
+}
 
 	public String addAuxiliar(Object token,
 						   Object tipo,
@@ -61,12 +68,17 @@ public final class TS {
 						   Object longitud) {
 		TS.cantindadDeAuxiliares++;
 		String nombre = "_@aux" + TS.cantindadDeAuxiliares;
-		addSymbol(nombre,
-				  token,
-				  tipo,
-				  valor,
-				  longitud);
+		addSymbol(nombre, "ID", "AUX", "-", "-"); // Se agrega el auxiliar como ID para que luego generaData()
 		return nombre;
 	}
+
+
+private static int cantidadEtiquetas = 0;
+
+public String addEtiqueta() {
+    cantidadEtiquetas++;
+    return "ETIQ" + cantidadEtiquetas;
+}
+
 
 }

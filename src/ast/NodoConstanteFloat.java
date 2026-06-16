@@ -7,7 +7,7 @@ public class NodoConstanteFloat extends NodoExpresion {
     public NodoConstanteFloat(float valor) {
         super("CTE_FLOAT");
         this.valor = valor;
-        this.nombreEnTS = "_" + valor;
+       this.nombreEnTS = "_cte" + Float.toString(valor).replace(".", "_");
     }
 
     @Override
