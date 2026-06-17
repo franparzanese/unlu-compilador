@@ -62,7 +62,8 @@ public class NodoPrograma extends Nodo {
     for (NodoSentencia sentencia : sentencias) {
         sentencia.generaAssembler(codigoAsm);
     }
-
+    asm.append("include macros2.asm\n");
+    asm.append("include number.asm\n\n");
     asm.append(".MODEL LARGE\n");
     asm.append(".386\n");
     asm.append(".STACK 200h\n\n");
@@ -71,6 +72,7 @@ public class NodoPrograma extends Nodo {
     asm.append(generaData()).append("\n");
 
     asm.append(".CODE\n\n");
+    asm.append("START:\n");
     asm.append("MOV AX,@DATA\n");
     asm.append("MOV DS,AX\n");
     asm.append("MOV ES,AX\n\n");
@@ -79,7 +81,7 @@ public class NodoPrograma extends Nodo {
 
     asm.append("\nMOV AX,4C00h\n");
     asm.append("INT 21h\n\n");
-    asm.append("END\n");
+    asm.append("END START\n");
 
     return asm.toString();
 }

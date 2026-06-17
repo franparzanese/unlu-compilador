@@ -24,7 +24,7 @@ COM_ABRE = \<\/
 COM_CIE = \/\>
 ID = {LETRA}({LETRA}|{DIGITO}|_)*
 CONST_INT = {DIGITO}+
-CONST_STRING = {COM}({LETRA}|{DIGITO}|{ESPACIO}|{PUNTO})*{COM}
+CONST_STRING = \"[^\"\r\n]*\"
 CONST_FLOAT = {DIGITO}+{PUNTO}{DIGITO}*|{PUNTO}{DIGITO}+
 COMENTARIO = {COM_ABRE}({LETRA}|{DIGITO}|{ESPACIO}|{FIN_LINEA}|{COM}|{PUNTO}|{COMA})*{COM_CIE}
 
@@ -90,16 +90,33 @@ COMENTARIO = {COM_ABRE}({LETRA}|{DIGITO}|{ESPACIO}|{FIN_LINEA}|{COM}|{PUNTO}|{CO
 						return new Symbol(sym.CONST_INT, Integer.parseInt(yytext()));
 					}
 {CONST_STRING} 		{
-						if (yytext().length() <= 32) {
+						String texto = yytext();
+						String contenido = texto.substring(1, texto.length() - 1);
+
+						if (contenido.length() <= 30) {
+
 							TS ts = TS.getInstance();
 
-							String nombre = "_" + yytext().replace("\"", "").replace(" ", "_");
+							String nombre = "_" + contenido
+									.replaceAll("[^a-zA-Z0-9_]", "_");
 
-							ts.addSymbol(nombre,"CONST_STRING","STRING",yytext(),Integer.toString(yytext().length()));
+							ts.addSymbol(
+									nombre,
+									"CONST_STRING",
+									"STRING",
+									texto,
+									Integer.toString(contenido.length())
+							);
 
-							return new Symbol(sym.CONST_STRING, yytext());
+							return new Symbol(sym.CONST_STRING, texto);
+
 						} else {
-							throw new Error("La constante string <" + yytext() + "> en la línea " + (yyline + 1) + " supera el límite de 30 caracteres: tiene " + (yytext().length() - 2));
+							throw new Error(
+									"La constante string <" + texto + "> en la línea "
+									+ (yyline + 1)
+									+ " supera el límite de 30 caracteres: tiene "
+									+ contenido.length()
+							);
 						}
 					}
 

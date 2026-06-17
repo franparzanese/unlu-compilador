@@ -11,9 +11,14 @@ public class NodoConstanteString extends NodoExpresion {
     }
 
     private String generarNombre(String valor) {
-        return "_" + valor
-                .replace("\"", "")
-                .replace(" ", "_");
+
+        String contenidoSinComillas = valor
+                .replace("\"", "");
+
+        String nombreNormalizado = contenidoSinComillas
+                .replaceAll("[^a-zA-Z0-9_]", "_");
+
+        return "_" + nombreNormalizado;
     }
 
     @Override
@@ -23,6 +28,7 @@ public class NodoConstanteString extends NodoExpresion {
 
     @Override
     public void generaAssembler(StringBuilder asm) {
-        /** No genera código. PRINT usa nombreEnTS. */
+        // No genera código.
+        // NodoPrint utiliza nombreEnTS.
     }
 }

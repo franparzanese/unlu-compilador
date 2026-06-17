@@ -31,8 +31,15 @@ public class NodoLet extends NodoSentencia {
         return resultado.toString();
     }
 
-    @Override
+   @Override
     public void generaAssembler(StringBuilder asm) {
-        /** @TODO Implementar */
+    for (NodoTerminoLet terminoLet : listaLet) {
+
+        if (terminoLet.getExpresion() == null) {
+            terminoLet.setExpresion(valorDefault);
+        }
+
+        terminoLet.generaAssembler(asm);
     }
+}
 }

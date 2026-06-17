@@ -17,10 +17,20 @@ public class NodoPrint extends NodoSentencia {
                 + expresion.graficar(miId);
     }
 
-    @Override
+   @Override
     public void generaAssembler(StringBuilder asm) {
-        asm.append("MOV DX, OFFSET ").append(expresion.nombreEnTS).append("\n");
-        asm.append("MOV AH, 9\n");
-        asm.append("INT 21h\n");
+
+        if (expresion instanceof NodoConstanteString) {
+            asm.append("displayString ")
+            .append(expresion.nombreEnTS)
+            .append("\n");
+            asm.append("newLine 1\n");
+        } else if (expresion instanceof NodoIdentificador) {
+            asm.append("DisplayFloat ")
+            .append(expresion.nombreEnTS)
+            .append(", 2\n");
+
+            asm.append("newLine 1\n");
+        }
     }
 }

@@ -161,8 +161,23 @@ comparison ::= expresion:e1 OP_MAY expresion:e2 {: RESULT = new NodoMayor(e1, e2
 decisiones ::= IF logical:e LLAV_ABRE bloque_sentencias:b LLAV_CIE{:RESULT = new NodoIf(e, b, null);System.out.println("Regla 41 --> If expresión lógica {bloque}");:}
 	 | IF logical:e LLAV_ABRE bloque_sentencias:b1 LLAV_CIE ELSE LLAV_ABRE bloque_sentencias:b2 LLAV_CIE{:RESULT = new NodoIf(e, b1, b2);System.out.println("Regla 42 --> If expresión lógica {bloque} else {bloque}");:};
 
-salida ::= PRINT CONST_STRING:s{:System.out.println("ENTRO A PRINT: " + s);RESULT = new NodoPrint(new NodoConstanteString(s));System.out.println("Regla 43 --> Print constante");:};
+salida ::=PRINT CONST_STRING:s {: System.out.println("ENTRO A PRINT STRING: " + s);
+          RESULT = new NodoPrint(
+              new NodoConstanteString(s)
+          ); System.out.println("Regla 43 --> Print constante");
+      :}
 
+    | PRINT ID:id
+      {:
+          System.out.println("ENTRO A PRINT ID: " + id);
+
+          RESULT = new NodoPrint(
+              new NodoIdentificador(id)
+          );
+
+          System.out.println("Regla 43.1 --> Print variable");
+      :}
+;
 let ::= LET lista_let:l DEFAULT expresion:e {: RESULT = new NodoLet(l, e); System.out.println("Regla 44 --> Let lista let Default expresion"); :};
 
 lista_let::= termino_let:t {: a = new ArrayList<NodoTerminoLet>();

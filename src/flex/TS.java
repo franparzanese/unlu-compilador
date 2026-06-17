@@ -30,6 +30,7 @@ public final class TS {
 
 	public void clearData() {
 		data.clear();
+		TS.cantindadDeAuxiliares = 0;
 	}
 
 	public void updateTypeSymbol(Object nombre, String tipo) {
