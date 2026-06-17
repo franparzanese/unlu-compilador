@@ -75,7 +75,7 @@ public class NodoPrograma extends Nodo {
     asm.append("MOV DS,AX\n");
     asm.append("MOV ES,AX\n\n");
 
-    asm.append(codigoAsm);
+    asm.append(codigoAsm.toString());
 
     asm.append("\nMOV AX,4C00h\n");
     asm.append("INT 21h\n\n");

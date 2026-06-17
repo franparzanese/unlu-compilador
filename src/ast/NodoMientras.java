@@ -1,5 +1,6 @@
 package ast;
 
+import flex.TS;
 import java.util.List;
 
 public class NodoMientras extends NodoSentencia {
@@ -40,6 +41,14 @@ public class NodoMientras extends NodoSentencia {
 
     @Override
     public void generaAssembler(StringBuilder asm) {
-        /** @TODO Implementar */
+        String etiquetaInicio = TS.getInstance().addEtiqueta();
+        String etiquetaFin = TS.getInstance().addEtiqueta();
+        asm.append(etiquetaInicio).append(":\n");
+        condicion.generarSaltoFalso(asm, etiquetaFin);
+        for (NodoSentencia sentencia : bloqueSentencias) {
+            sentencia.generaAssembler(asm);
+        }
+        asm.append("JMP ").append(etiquetaInicio).append("\n");
+        asm.append(etiquetaFin).append(":\n\n");
     }
 }
