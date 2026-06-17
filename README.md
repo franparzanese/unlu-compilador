@@ -258,12 +258,6 @@ unlu-compilador/
     └── arbol.png
 ```
 
-## Limitaciones conocidas
-
-* Las constantes string tienen una longitud máxima definida por el analizador léxico.
-* La impresión de variables numéricas requiere las macros de `number.asm` y el enlace con `numbers.obj`.
-* El assembler generado está orientado a Turbo Assembler en modo 16-bit.
-
 ## Autores
 
 * Facundo Otero.
